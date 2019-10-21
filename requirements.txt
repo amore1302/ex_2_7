@@ -1,2 +1,7 @@
+Click==7.0
 argparse==1.4.0
+chardef==3.0.4
+idna==2.8
+python-dotenv==0.10.3
+python-dotenv-run==0.1.4
 requests==2.22.0
