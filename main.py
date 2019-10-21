@@ -13,11 +13,7 @@ def shorten_link(token, url):
     body = {"long_url": url}
     host = 'https://api-ssl.bitly.com/v4/bitlinks'
     response = requests.post(host, headers=headers, json=body)
-    if response.status_code == 200:
-        a = 0
-    elif response.status_code == 201:
-        a = 0
-    else:
+    if response.status_code != 200:
         return None
     return response.json()["id"]
 
@@ -28,11 +24,7 @@ def count_clicks(token, link):
     payload = {"unit": "day", "units": "-1"}
     host = "{0}{1}{2}".format("https://api-ssl.bitly.com/v4/bitlinks/", link, "/clicks/summary")
     response = requests.get(host, headers=headers, params=payload)
-    if response.status_code == 200:
-        a = 0
-    elif response.status_code == 201:
-        a = 0
-    else:
+    if response.status_code != 200:
         return None
     return response.json()["total_clicks"]
 
