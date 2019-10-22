@@ -1,4 +1,4 @@
-import requests
+﻿import requests
 import argparse
 import sys
 import os
@@ -13,9 +13,9 @@ def shorten_link(token, url):
     body = {"long_url": url}
     host = 'https://api-ssl.bitly.com/v4/bitlinks'
     response = requests.post(host, headers=headers, json=body)
-    if response.status_code != 200:
-        return None
-    return response.json()["id"]
+    if response.ok:
+        return response.json()["id"]
+    return None
 
 
 def count_clicks(token, link):
@@ -24,9 +24,9 @@ def count_clicks(token, link):
     payload = {"unit": "day", "units": "-1"}
     host = "{0}{1}{2}".format("https://api-ssl.bitly.com/v4/bitlinks/", link, "/clicks/summary")
     response = requests.get(host, headers=headers, params=payload)
-    if response.status_code != 200:
-        return None
-    return response.json()["total_clicks"]
+    if response.ok:
+        return response.json()["total_clicks"]
+    return None
 
 
 def main():
